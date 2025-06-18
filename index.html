@@ -5,11 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Management - Tables</title>
     <link rel="stylesheet" href="css/style.css">
-    <link
-      rel="icon"
-      href="./images/logo.png"
-      type="image/x-icon"
-    />
+    <link rel="icon" href="./images/logo.png" type="image/x-icon">
+    <style>
+        /* Prevent zooming on double-tap */
+        * {
+            touch-action: manipulation;
+        }
+        
+        /* Bottom nav fix */
+        body {
+            padding-bottom: 70px;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        
+        /* Quantity input styling */
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0 5px;
+            padding: 5px;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+        
+        .quantity-input::-webkit-outer-spin-button,
+        .quantity-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -63,7 +98,7 @@
                     <span>Total: ₹</span>
                     <span id="orderTotal">0</span>
                 </div>
-                <button class="btn confirm-order">Add to Bill</button>
+                <button class="btn confirm-order">Update Bill</button>
             </div>
         </div>
     </main>

@@ -169,7 +169,7 @@ function loadMenuItems() {
             <p>₹${item.price}</p>
             <div class="item-controls">
                 <button class="decrease">-</button>
-                <span>0</span>
+                <input type="number" class="quantity-input" value="0" min="0">
                 <button class="increase">+</button>
             </div>
         `;
@@ -177,27 +177,81 @@ function loadMenuItems() {
         // Set current quantity if item is already in order
         const currentOrder = state.orders[state.currentTable];
         const existingItem = currentOrder.items.find(i => i.id === item.id);
+        const inputField = itemElement.querySelector('.quantity-input');
+        
         if (existingItem) {
-            itemElement.querySelector('span').textContent = existingItem.quantity;
+            inputField.value = existingItem.quantity;
         }
         
         // Add event listeners for quantity controls
-        itemElement.querySelector('.increase').addEventListener('click', function() {
-            const span = this.parentElement.querySelector('span');
-            let quantity = parseInt(span.textContent);
-            span.textContent = quantity + 1;
+        itemElement.querySelector('.increase').addEventListener('click', function(e) {
+            e.preventDefault();
+            inputField.value = parseInt(inputField.value) + 1;
+            inputField.dispatchEvent(new Event('change'));
         });
         
-        itemElement.querySelector('.decrease').addEventListener('click', function() {
-            const span = this.parentElement.querySelector('span');
-            let quantity = parseInt(span.textContent);
-            if (quantity > 0) {
-                span.textContent = quantity - 1;
+        itemElement.querySelector('.decrease').addEventListener('click', function(e) {
+            e.preventDefault();
+            const value = parseInt(inputField.value);
+            if (value > 0) {
+                inputField.value = value - 1;
+                inputField.dispatchEvent(new Event('change'));
             }
+        });
+        
+        // Handle direct input changes
+        inputField.addEventListener('change', function() {
+            if (this.value < 0) this.value = 0;
+            updateOrderItem(item.id, parseInt(this.value));
         });
         
         menuItemsContainer.appendChild(itemElement);
     });
+}
+
+function updateOrderItem(itemId, quantity) {
+    const currentOrder = state.orders[state.currentTable];
+    
+    // Find the item in menuData
+    let foundItem = null;
+    Object.values(menuData).forEach(category => {
+        category.forEach(item => {
+            if (item.id === itemId) {
+                foundItem = item;
+            }
+        });
+    });
+    
+    if (foundItem) {
+        // Check if item already exists in order
+        const existingItemIndex = currentOrder.items.findIndex(i => i.id === itemId);
+        
+        if (quantity > 0) {
+            if (existingItemIndex !== -1) {
+                currentOrder.items[existingItemIndex].quantity = quantity;
+            } else {
+                currentOrder.items.push({
+                    id: foundItem.id,
+                    name: foundItem.name,
+                    price: foundItem.price,
+                    quantity: quantity
+                });
+            }
+        } else if (existingItemIndex !== -1) {
+            // Remove item if quantity is 0
+            currentOrder.items.splice(existingItemIndex, 1);
+        }
+        
+        // Recalculate total
+        let total = 0;
+        currentOrder.items.forEach(item => {
+            total += item.price * item.quantity;
+        });
+        currentOrder.total = total;
+        
+        loadCurrentOrder();
+        saveData();
+    }
 }
 
 function loadCurrentOrder() {
@@ -205,7 +259,6 @@ function loadCurrentOrder() {
     orderItemsContainer.innerHTML = '';
     
     const currentOrder = state.orders[state.currentTable];
-    let total = 0;
     
     currentOrder.items.forEach(item => {
         const itemElement = document.createElement('div');
@@ -215,60 +268,15 @@ function loadCurrentOrder() {
             <span>₹${item.price * item.quantity}</span>
         `;
         orderItemsContainer.appendChild(itemElement);
-        total += item.price * item.quantity;
     });
     
-    document.getElementById('orderTotal').textContent = total;
-    currentOrder.total = total;
+    document.getElementById('orderTotal').textContent = currentOrder.total;
 }
 
 function confirmOrder() {
-    const currentOrder = state.orders[state.currentTable];
-    currentOrder.items = [];
-    
-    // Get all menu items and their quantities
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(itemElement => {
-        const itemName = itemElement.querySelector('h3').textContent;
-        const quantity = parseInt(itemElement.querySelector('.item-controls span').textContent);
-        
-        if (quantity > 0) {
-            // Find the item in menuData
-            let foundItem = null;
-            Object.values(menuData).forEach(category => {
-                category.forEach(item => {
-                    if (item.name === itemName) {
-                        foundItem = item;
-                    }
-                });
-            });
-            
-            if (foundItem) {
-                // Check if item already exists in order
-                const existingItemIndex = currentOrder.items.findIndex(i => i.id === foundItem.id);
-                if (existingItemIndex !== -1) {
-                    currentOrder.items[existingItemIndex].quantity = quantity;
-                } else {
-                    currentOrder.items.push({
-                        id: foundItem.id,
-                        name: foundItem.name,
-                        price: foundItem.price,
-                        quantity: quantity
-                    });
-                }
-            }
-        }
-    });
-    
-    // Recalculate total
-    let total = 0;
-    currentOrder.items.forEach(item => {
-        total += item.price * item.quantity;
-    });
-    currentOrder.total = total;
-    
-    loadCurrentOrder();
+    // Just save the current state (items are already updated live)
     saveData();
+    alert('Order updated successfully!');
 }
 
 // Billing View Functions
@@ -329,6 +337,12 @@ function clearBill(tableNumber) {
     
     saveData();
     loadActiveBills();
+    
+    // If we're viewing this table, update the view
+    if (state.currentTable === tableNumber) {
+        loadCurrentOrder();
+        loadMenuItems();
+    }
 }
 
 // Reports View Functions
@@ -491,7 +505,7 @@ function addNewMenuItem() {
             id: newId,
             name: name,
             price: price,
-            image: "images/menu/default.jpg" // You should add a default image
+            image: "images/menu/default.jpg"
         });
         
         // Clear form
