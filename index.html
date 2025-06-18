@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Management - Tables</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link
+      rel="icon"
+      href="./images/logo.png"
+      type="image/x-icon"
+    />
+</head>
+<body>
+    <header>
+        <h1>Hotel Management</h1>
+    </header>
+
+    <main class="tables-view">
+        <div class="tables-grid">
+            <div class="table-card" data-table="1">
+                <h2>Table 1</h2>
+                <div class="table-status available">Available</div>
+            </div>
+            <div class="table-card" data-table="2">
+                <h2>Table 2</h2>
+                <div class="table-status available">Available</div>
+            </div>
+            <div class="table-card" data-table="3">
+                <h2>Table 3</h2>
+                <div class="table-status available">Available</div>
+            </div>
+            <div class="table-card" data-table="4">
+                <h2>Table 4</h2>
+                <div class="table-status available">Available</div>
+            </div>
+        </div>
+
+        <div class="table-details" id="tableDetails" style="display: none;">
+            <div class="details-header">
+                <h2 id="currentTable">Table 1</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" data-category="rotis">Rotis</button>
+                <button class="category-btn" data-category="curries">Curries</button>
+                <button class="category-btn" data-category="biryanis">Biryanis</button>
+                <button class="category-btn" data-category="friedrice">Fried Rice</button>
+                <button class="category-btn" data-category="drinks">Drinks</button>
+            </div>
+            
+            <div class="menu-items" id="menuItems">
+                <!-- Items will be loaded here by JavaScript -->
+            </div>
+            
+            <div class="current-order">
+                <h3>Current Order</h3>
+                <div class="order-items" id="orderItems">
+                    <!-- Order items will appear here -->
+                </div>
+                <div class="order-total">
+                    <span>Total: ₹</span>
+                    <span id="orderTotal">0</span>
+                </div>
+                <button class="btn confirm-order">Add to Bill</button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="index.html" class="nav-item active">
+            <span class="icon">📋</span>
+            <span class="text">Tables</span>
+        </a>
+        <a href="billing.html" class="nav-item">
+            <span class="icon">💰</span>
+            <span class="text">Bill</span>
+        </a>
+        <a href="phonepay.html" class="nav-item">
+            <span class="icon">📱</span>
+            <span class="text">PhonePe</span>
+        </a>
+        <a href="reports.html" class="nav-item">
+            <span class="icon">📊</span>
+            <span class="text">Reports</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="icon">⚙️</span>
+            <span class="text">Settings</span>
+        </a>
+    </nav>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
