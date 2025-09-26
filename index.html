@@ -1,178 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Management - Tables</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="./images/logo.png" type="image/x-icon">
-    <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#000000">
-
-    <style>
-        /* Prevent zooming on double-tap */
-        * {
-            touch-action: manipulation;
-        }
-        
-        /* Bottom nav fix */
-        body {
-            padding-bottom: 70px;
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        
-        /* Quantity input styling */
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 0 5px;
-            padding: 5px;
-            -webkit-appearance: none;
-            -moz-appearance: textfield;
-        }
-        
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Hotel Management</h1>
-    </header>
-
-    <main class="tables-view">
-        <div class="tables-grid">
-            <div class="table-card" data-table="1">
-                <h2>Table 1</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="2">
-                <h2>Table 2</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="3">
-                <h2>Table 3</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="4">
-                <h2>Table 4</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="5">
-                <h2>Table 5</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="6">
-                <h2>Table 6</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="7">
-                <h2>Table 7</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="8">
-                <h2>Table 8</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="9">
-                <h2>Table 9</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="10">
-                <h2>Table 10</h2>
-                <div class="table-status available">Available</div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Going Digital - Restaurant Management System</title>
+    <link rel="stylesheet" href="css/landing.css" />
+    <link rel="icon" href="./images/logo.png" type="image/x-icon" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#000000" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <img src="images/logo.png" alt="Logo" class="logo" />
+          <span class="brand-text">Going Digital</span>
         </div>
-
-        <div class="table-details" id="tableDetails" style="display: none;">
-            <div class="details-header">
-                <h2 id="currentTable">Table 1</h2>
-                <button class="close-btn">&times;</button>
-            </div>
-            
-            <div class="menu-categories">
-                <button class="category-btn active" data-category="rotis">Rotis</button>
-                <button class="category-btn" data-category="curries">Curries</button>
-                <button class="category-btn" data-category="biryanis">Biryanis</button>
-                <button class="category-btn" data-category="friedrice">Fried Rice</button>
-                <button class="category-btn" data-category="drinks">Drinks</button>
-            </div>
-            
-            <div class="menu-items" id="menuItems">
-                <!-- Items will be loaded here by JavaScript -->
-            </div>
-            
-            <div class="current-order">
-                <h3>Current Order</h3>
-                <div class="order-items" id="orderItems">
-                    <!-- Order items will appear here -->
-                </div>
-                <div class="order-total">
-                    <span>Total: ₹</span>
-                    <span id="orderTotal">0</span>
-                </div>
-                <button class="btn confirm-order">Update Bill</button>
-            </div>
+        <div class="nav-menu">
+          <a href="#features" class="nav-link">Features</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="dashboard.html" class="nav-link cta-btn">Get Started</a>
         </div>
-    </main>
-
-    <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <span class="icon">📋</span>
-            <span class="text">Tables</span>
-        </a>
-        <a href="billing.html" class="nav-item">
-            <span class="icon">💰</span>
-            <span class="text">Bill</span>
-        </a>
-        <a href="phonepay.html" class="nav-item">
-            <span class="icon">📱</span>
-            <span class="text">PhonePe</span>
-        </a>
-        <a href="reports.html" class="nav-item">
-            <span class="icon">📊</span>
-            <span class="text">Reports</span>
-        </a>
-        <a href="settings.html" class="nav-item">
-            <span class="icon">⚙️</span>
-            <span class="text">Settings</span>
-        </a>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
     </nav>
 
-    <button id="installBtn" style="
-        display: none;
-        position: fixed;
-        bottom: 80px;
-        right: 20px;
-        padding: 12px 20px;
-        background-color: #4a6fa5;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        z-index: 1000;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    ">
-    Install App
-    </button>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Transform Your Restaurant with Digital Solutions
+          </h1>
+          <p class="hero-description">
+            Streamline your operations, manage orders efficiently, and provide
+            exceptional customer experiences with our comprehensive restaurant
+            management system.
+          </p>
+          <div class="hero-buttons">
+            <a href="dashboard.html" class="btn btn-primary">
+              <i class="fas fa-rocket"></i>
+              Start Managing
+            </a>
+            <a href="#features" class="btn btn-secondary">
+              <i class="fas fa-play"></i>
+              Learn More
+            </a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-card">
+            <div class="card-header">
+              <div class="card-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+            <div class="card-content">
+              <div class="menu-preview">
+                <div class="menu-item">
+                  <img
+                    src="images/menu/chicken-biryani.jpg"
+                    alt="Chicken Biryani"
+                  />
+                  <div class="item-info">
+                    <h4>Chicken Biryani</h4>
+                    <p>₹250</p>
+                  </div>
+                </div>
+                <div class="menu-item">
+                  <img src="images/menu/butter-naan.jpg" alt="Butter Naan" />
+                  <div class="item-info">
+                    <h4>Butter Naan</h4>
+                    <p>₹80</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-wave">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path
+            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+            opacity=".25"
+            fill="#111111"
+          ></path>
+          <path
+            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+            opacity=".5"
+            fill="#111111"
+          ></path>
+          <path
+            d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+            fill="#111111"
+          ></path>
+        </svg>
+      </div>
+    </section>
 
-    <script src="js/script.js"></script>
-</body>
+    <!-- Features Section -->
+    <section id="features" class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>Powerful Features for Modern Restaurants</h2>
+          <p>Everything you need to run your restaurant efficiently</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3>Menu Management</h3>
+            <p>
+              Easily manage your menu items, prices, and availability with our
+              intuitive interface.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Order Processing</h3>
+            <p>
+              Streamline order taking and processing with real-time updates and
+              notifications.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-table"></i>
+            </div>
+            <h3>Table Management</h3>
+            <p>
+              Efficiently manage table reservations, occupancy, and customer
+              flow.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-credit-card"></i>
+            </div>
+            <h3>Payment Integration</h3>
+            <p>
+              Seamless payment processing with multiple payment options
+              including digital wallets.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-chart-bar"></i>
+            </div>
+            <h3>Analytics & Reports</h3>
+            <p>
+              Comprehensive reporting and analytics to track performance and
+              make data-driven decisions.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Mobile Optimized</h3>
+            <p>
+              Fully responsive design that works perfectly on all devices -
+              tablets, phones, and desktops.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <h2>About Going Digital</h2>
+            <p>
+              We're passionate about helping restaurants embrace digital
+              transformation. Our comprehensive management system is designed to
+              simplify operations, reduce costs, and enhance customer
+              satisfaction.
+            </p>
+            <p>
+              With years of experience in the hospitality industry, we
+              understand the unique challenges restaurants face. That's why
+              we've built a solution that's not just powerful, but also easy to
+              use and affordable.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">Happy Restaurants</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">1M+</span>
+                <span class="stat-label">Orders Processed</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">99.9%</span>
+                <span class="stat-label">Uptime</span>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <div class="image-container">
+              <img
+                src="images/logo.png"
+                alt="Restaurant Management"
+                class="about-img"
+              />
+              <div class="floating-card">
+                <i class="fas fa-check-circle"></i>
+                <span>Order Complete</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Transform Your Restaurant?</h2>
+          <p>
+            Join hundreds of restaurants already using our platform to
+            streamline their operations.
+          </p>
+          <a href="dashboard.html" class="btn btn-primary btn-large">
+            <i class="fas fa-rocket"></i>
+            Get Started Today
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <div class="footer-brand">
+              <img src="images/logo.png" alt="Logo" class="footer-logo" />
+              <span class="footer-brand-text">Going Digital</span>
+            </div>
+            <p>Transforming restaurants with innovative digital solutions.</p>
+          </div>
+          <div class="footer-section">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="dashboard.html">Dashboard</a></li>
+              <li><a href="reports.html">Reports</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h4>Contact</h4>
+            <div class="contact-info">
+              <p><i class="fas fa-envelope"></i> sasikiranworks@gmail.com</p>
+              <p><i class="fas fa-phone"></i> +91 8919426092</p>
+              <p><i class="fas fa-map-marker-alt"></i> Tadepalligudem, India</p>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Going Digital. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/landing.js"></script>
+  </body>
 </html>
