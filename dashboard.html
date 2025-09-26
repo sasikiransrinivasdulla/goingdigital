@@ -1,159 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hotel Management - Tables</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="./images/logo.png" type="image/x-icon">
-    <link rel="manifest" href="./manifest.json">
-    <meta name="theme-color" content="#000000">
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="./images/logo.png" type="image/x-icon" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#000000" />
 
     <style>
-        /* Prevent zooming on double-tap */
-        * {
-            touch-action: manipulation;
-        }
-        
-        /* Bottom nav fix */
-        body {
-            padding-bottom: 70px;
-            position: relative;
-            min-height: 100vh;
-        }
-        
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-        
-        /* Quantity input styling */
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin: 0 5px;
-            padding: 5px;
-            -webkit-appearance: none;
-            -moz-appearance: textfield;
-        }
-        
-        .quantity-input::-webkit-outer-spin-button,
-        .quantity-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
+      /* Prevent zooming on double-tap */
+      * {
+        touch-action: manipulation;
+      }
+
+      /* Bottom nav fix */
+      body {
+        padding-bottom: 70px;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+      }
+
+      /* Quantity input styling */
+      .quantity-input {
+        width: 40px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin: 0 5px;
+        padding: 5px;
+        -webkit-appearance: none;
+        -moz-appearance: textfield;
+      }
+
+      .quantity-input::-webkit-outer-spin-button,
+      .quantity-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
+      <div class="header-content">
         <h1>Hotel Management</h1>
+        <a href="index.html" class="back-to-landing">← Home</a>
+      </div>
     </header>
 
     <main class="tables-view">
-        <div class="tables-grid">
-            <div class="table-card" data-table="1">
-                <h2>Table 1</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="2">
-                <h2>Table 2</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="3">
-                <h2>Table 3</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="4">
-                <h2>Table 4</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="5">
-                <h2>Table 5</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="6">
-                <h2>Table 6</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="7">
-                <h2>Table 7</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="8">
-                <h2>Table 8</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="9">
-                <h2>Table 9</h2>
-                <div class="table-status available">Available</div>
-            </div>
-            <div class="table-card" data-table="10">
-                <h2>Table 10</h2>
-                <div class="table-status available">Available</div>
-            </div>
+      <div class="tables-grid">
+        <div class="table-card" data-table="1">
+          <h2>Table 1</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="2">
+          <h2>Table 2</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="3">
+          <h2>Table 3</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="4">
+          <h2>Table 4</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="5">
+          <h2>Table 5</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="6">
+          <h2>Table 6</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="7">
+          <h2>Table 7</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="8">
+          <h2>Table 8</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="9">
+          <h2>Table 9</h2>
+          <div class="table-status available">Available</div>
+        </div>
+        <div class="table-card" data-table="10">
+          <h2>Table 10</h2>
+          <div class="table-status available">Available</div>
+        </div>
+      </div>
+
+      <div class="table-details" id="tableDetails" style="display: none">
+        <div class="details-header">
+          <h2 id="currentTable">Table 1</h2>
+          <button class="close-btn">&times;</button>
         </div>
 
-        <div class="table-details" id="tableDetails" style="display: none;">
-            <div class="details-header">
-                <h2 id="currentTable">Table 1</h2>
-                <button class="close-btn">&times;</button>
-            </div>
-            
-            <div class="menu-categories">
-                <button class="category-btn active" data-category="rotis">Rotis</button>
-                <button class="category-btn" data-category="curries">Curries</button>
-                <button class="category-btn" data-category="biryanis">Biryanis</button>
-                <button class="category-btn" data-category="friedrice">Fried Rice</button>
-                <button class="category-btn" data-category="drinks">Drinks</button>
-            </div>
-            
-            <div class="menu-items" id="menuItems">
-                <!-- Items will be loaded here by JavaScript -->
-            </div>
-            
-            <div class="current-order">
-                <h3>Current Order</h3>
-                <div class="order-items" id="orderItems">
-                    <!-- Order items will appear here -->
-                </div>
-                <div class="order-total">
-                    <span>Total: ₹</span>
-                    <span id="orderTotal">0</span>
-                </div>
-                <button class="btn confirm-order">Update Bill</button>
-            </div>
+        <div class="menu-categories">
+          <button class="category-btn active" data-category="rotis">
+            Rotis
+          </button>
+          <button class="category-btn" data-category="curries">Curries</button>
+          <button class="category-btn" data-category="biryanis">
+            Biryanis
+          </button>
+          <button class="category-btn" data-category="friedrice">
+            Fried Rice
+          </button>
+          <button class="category-btn" data-category="drinks">Drinks</button>
         </div>
+
+        <div class="menu-items" id="menuItems">
+          <!-- Items will be loaded here by JavaScript -->
+        </div>
+
+        <div class="current-order">
+          <h3>Current Order</h3>
+          <div class="order-items" id="orderItems">
+            <!-- Order items will appear here -->
+          </div>
+          <div class="order-total">
+            <span>Total: ₹</span>
+            <span id="orderTotal">0</span>
+          </div>
+          <button class="btn confirm-order">Update Bill</button>
+        </div>
+      </div>
     </main>
 
     <nav class="bottom-nav">
-        <a href="index.html" class="nav-item active">
-            <span class="icon">📋</span>
-            <span class="text">Tables</span>
-        </a>
-        <a href="billing.html" class="nav-item">
-            <span class="icon">💰</span>
-            <span class="text">Bill</span>
-        </a>
-        <a href="phonepay.html" class="nav-item">
-            <span class="icon">📱</span>
-            <span class="text">PhonePe</span>
-        </a>
-        <a href="reports.html" class="nav-item">
-            <span class="icon">📊</span>
-            <span class="text">Reports</span>
-        </a>
-        <a href="settings.html" class="nav-item">
-            <span class="icon">⚙️</span>
-            <span class="text">Settings</span>
-        </a>
+      <a href="dashboard.html" class="nav-item active">
+        <span class="icon">📋</span>
+        <span class="text">Tables</span>
+      </a>
+      <a href="billing.html" class="nav-item">
+        <span class="icon">💰</span>
+        <span class="text">Bill</span>
+      </a>
+      <a href="phonepay.html" class="nav-item">
+        <span class="icon">📱</span>
+        <span class="text">PhonePe</span>
+      </a>
+      <a href="reports.html" class="nav-item">
+        <span class="icon">📊</span>
+        <span class="text">Reports</span>
+      </a>
+      <a href="settings.html" class="nav-item">
+        <span class="icon">⚙️</span>
+        <span class="text">Settings</span>
+      </a>
     </nav>
 
-    <button id="installBtn" style="
+    <button
+      id="installBtn"
+      style="
         display: none;
         position: fixed;
         bottom: 80px;
@@ -165,14 +176,15 @@
         border-radius: 8px;
         font-size: 16px;
         font-weight: bold;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         z-index: 1000;
         cursor: pointer;
         transition: all 0.3s ease;
-    ">
-    Install App
+      "
+    >
+      Install App
     </button>
 
     <script src="js/script.js"></script>
-</body>
+  </body>
 </html>
