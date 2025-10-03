@@ -442,24 +442,36 @@ function loadActiveBills() {
       billElement.innerHTML = `
                 <div class="bill-header">
                     <h3>🍽️ Table ${tableNumber}</h3>
-                    <span>${new Date().toLocaleTimeString()}</span>
+                    <div class="bill-info">
+                        <span class="table-status occupied">Occupied</span>
+                        <span class="bill-time">${new Date().toLocaleTimeString()}</span>
+                    </div>
                 </div>
                 <div class="bill-items">
                     ${order.items
                       .map(
                         (item) => `
                         <div class="bill-item">
-                            <span>${item.name} × ${item.quantity}</span>
-                            <span>₹${item.price * item.quantity}</span>
+                            <span class="item-details">${item.name} × ${
+                          item.quantity
+                        }</span>
+                            <span class="item-price">₹${
+                              item.price * item.quantity
+                            }</span>
                         </div>
                     `
                       )
                       .join("")}
                 </div>
-                <div class="bill-total">
-                    💰 Total: ₹${order.total}
+                <div class="bill-summary">
+                    <div class="item-count">${order.items.length} items</div>
+                    <div class="bill-total">💰 Total: ₹${order.total}</div>
                 </div>
-                <button class="clear-bill" data-table="${tableNumber}">✅ Complete Order</button>
+                <div class="bill-actions">
+                    <button class="clear-bill" data-table="${tableNumber}">
+                        ✅ Complete Order
+                    </button>
+                </div>
             `;
 
       billElement
@@ -485,6 +497,18 @@ function loadActiveBills() {
 }
 
 function clearBill(tableNumber) {
+  const order = state.orders[tableNumber];
+  if (!order || !order.items || order.items.length === 0) {
+    alert("No active order for this table!");
+    return;
+  }
+
+  // Confirm before clearing the bill
+  const confirmMessage = `Complete order for Table ${tableNumber}?\nTotal: ₹${order.total}`;
+  if (!confirm(confirmMessage)) {
+    return;
+  }
+
   // Move order to bills history
   if (!state.bills[tableNumber]) {
     state.bills[tableNumber] = [];
@@ -493,6 +517,7 @@ function clearBill(tableNumber) {
   state.bills[tableNumber].push({
     ...state.orders[tableNumber],
     date: new Date().toISOString(),
+    completedAt: new Date().toLocaleString(),
   });
 
   // Clear current order
@@ -501,11 +526,16 @@ function clearBill(tableNumber) {
   saveData();
   loadActiveBills();
 
+  // Update table status to available
+  updateTableStatus();
+
   // If we're viewing this table, update the view
   if (state.currentTable === tableNumber) {
     loadCurrentOrder();
     loadMenuItems();
   }
+
+  alert(`Order for Table ${tableNumber} completed successfully!`);
 }
 
 // Reports View Functions
@@ -523,12 +553,25 @@ function initReportsView() {
     ?.addEventListener("click", downloadDailyReport);
 }
 
+/**
+ * Loads the daily reports for the given date.
+ * The daily report will contain the total sales and number of orders for the day.
+ */
 function loadDailyReports() {
   const date = document.getElementById("reportDate").value;
   const allBillsList = document.getElementById("allBillsList");
   allBillsList.innerHTML = "";
 
+  /**
+   * The total sales for the given date.
+   * @type {number}
+   */
   let totalSales = 0;
+
+  /**
+   * The total number of orders for the given date.
+   * @type {number}
+   */
   let totalOrders = 0;
 
   // Filter bills by selected date
@@ -571,27 +614,38 @@ function loadDailyReports() {
   document.getElementById("totalOrders").textContent = totalOrders;
 }
 
+/**
+ * Downloads a daily report for the given date.
+ * The report will contain the total sales and number of orders for the day.
+ * @param {string} date - The date for which the report should be generated.
+ */
 function downloadDailyReport() {
-  const date = document.getElementById("reportDate").value;
+  const dateElement = document.getElementById("reportDate");
+  const date = dateElement.value;
+
   let reportContent = `Daily Report - ${date}\n\n`;
 
   let totalSales = 0;
   let totalOrders = 0;
 
+  // Iterate over all bills for the given date
   Object.keys(state.bills).forEach((tableNumber) => {
     state.bills[tableNumber].forEach((bill) => {
       const billDate = new Date(bill.date).toISOString().split("T")[0];
       if (billDate === date) {
+        // Add the bill details to the report
         reportContent += `Table ${tableNumber} - ${new Date(
           bill.date
         ).toLocaleTimeString()}\n`;
 
+        // Add the items for the bill to the report
         bill.items.forEach((item) => {
           reportContent += `${item.name} (${item.quantity}) - ₹${
             item.price * item.quantity
           }\n`;
         });
 
+        // Add the total for the bill to the report
         reportContent += `Total: ₹${bill.total}\n\n`;
         totalSales += bill.total;
         totalOrders++;
@@ -599,10 +653,11 @@ function downloadDailyReport() {
     });
   });
 
+  // Add the total sales and orders to the report
   reportContent += `\nTotal Sales: ₹${totalSales}\n`;
   reportContent += `Total Orders: ${totalOrders}\n`;
 
-  // Create download link
+  // Create a download link for the report
   const blob = new Blob([reportContent], { type: "text/plain" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
